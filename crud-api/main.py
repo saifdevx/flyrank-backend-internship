@@ -81,18 +81,29 @@ def update_task(id: int, updated: TaskUpdate):
     if not updated.title.strip():
         raise HTTPException(status_code=400, detail="Title cannot be empty")
     
-    for task in tasks:
-        if task["id"] == id:
-            task["title"] = updated.title
-            task["done"] = updated.done
-            return task
-    raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    conn = get_db()
+    cursor = conn.execute(
+        "UPDATE tasks SET title = ?, done = ? WHERE id = ?",
+        (updated.title, int(updated.done), id)
+    )
+    conn.commit()
+    
+    if cursor.rowcount == 0:
+        conn.close()
+        raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    
+    row = conn.execute("SELECT * FROM tasks WHERE id = ?", (id,)).fetchone()
+    conn.close()
+    return dict(row)
 
 
 @app.delete("/tasks/{id}", status_code=204, summary="Delete a task")
 def delete_task(id: int):
-    for task in tasks:
-        if task["id"] == id:
-            tasks.remove(task)
-            return
-    raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    conn = get_db()
+    cursor = conn.execute("DELETE FROM tasks WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    
+    if cursor.rowcount == 0:
+        raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    return
