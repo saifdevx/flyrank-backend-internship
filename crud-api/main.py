@@ -39,16 +39,21 @@ def health():
 
 @app.get("/tasks", summary="List all tasks")
 def get_tasks():
-    return tasks
-
+    conn = get_db()
+    rows = conn.execute("SELECT * FROM tasks").fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
 
 
 @app.get("/tasks/{id}", summary="Get a single task by id")
 def get_task(id: int):
-    for task in tasks:
-        if task["id"] == id:
-            return task
-    raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    conn = get_db()
+    row = conn.execute("SELECT * FROM tasks WHERE id = ?", (id,)).fetchone()
+    conn.close()
+    if row is None:
+        raise HTTPException(status_code=404, detail=f"Task {id} not found")
+    return dict(row)
+
 
 class TaskCreate(BaseModel):
     title: str
@@ -89,6 +94,3 @@ def delete_task(id: int):
             tasks.remove(task)
             return
     raise HTTPException(status_code=404, detail=f"Task {id} not found")
-
-
-    
