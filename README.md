@@ -7,6 +7,7 @@ Assignments and projects for the FlyRank Backend AI Engineering Internship — J
 | Week | Assignment | Folder | Status |
 |------|-----------|--------|--------|
 | Week 2 | BE-01 — Build your first CRUD API | [`crud-api/`](./crud-api) | ✅ Submitted |
+| Week 3 | BE-02 — Connecting your CRUD to the database | [`crud-api/`](./crud-api) | ✅ Submitted |
 
 Each folder contains its own README with setup instructions, endpoint documentation, and screenshots.
 
