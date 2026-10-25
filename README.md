@@ -10,6 +10,7 @@ Assignments and projects for the FlyRank Backend AI Engineering Internship — J
 | Week 3 | BE-02 — Connecting your CRUD to the database | [`crud-api/`](./crud-api) | ✅ Submitted |
 | Week 3 | BE-04 — Containerize your stack | [`containerize-stack/`](./containerize-stack) | ✅ Submitted |
 | Week 4 | BE-03 — Auth: Login & protect | [`auth-login/`](./auth-login) | ✅ Submitted |
+| Week 5 | BE-05 — The polite scraper | [`scraper/`](./scraper) | ✅ Submitted |
 
 Each folder contains its own README with setup instructions, endpoint documentation, and screenshots.
 
