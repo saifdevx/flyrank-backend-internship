@@ -11,6 +11,7 @@ Assignments and projects for the FlyRank Backend AI Engineering Internship — J
 | Week 3 | BE-04 — Containerize your stack | [`containerize-stack/`](./containerize-stack) | ✅ Submitted |
 | Week 4 | BE-03 — Auth: Login & protect | [`auth-login/`](./auth-login) | ✅ Submitted |
 | Week 5 | BE-05 — The polite scraper | [`scraper/`](./scraper) | ✅ Submitted |
+| Week 6 | BE-07 — Connect to an AI API | [`llm-api/`](./llm-api) | ✅ Submitted |
 
 Each folder contains its own README with setup instructions, endpoint documentation, and screenshots.
 
