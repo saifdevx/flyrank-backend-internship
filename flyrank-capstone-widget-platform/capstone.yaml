@@ -1,0 +1,19 @@
+name: flyrank-capstone-widget-platform
+setup: cp .env.example .env && pip install -r requirements.txt
+run: uvicorn app.main:app --host 0.0.0.0 --port 8000
+seed: python -m app.seed
+test: python -m pytest -q
+base_url: http://localhost:8000
+notes: >
+  Needs DEV_TOOLS=1 (set in .env.example) for the probe switches. `python -m app.seed` prints two demo API keys
+  (tenant A and B) and the demo widget ids (demo-contact-a, demo-signup-b). Admin auth: "Authorization: Bearer <key>".
+endpoints:
+  - {method: GET,     path: /health}
+  - {method: GET,     path: /widget.js?id=demo-contact-a}
+  - {method: GET,     path: /widgets/demo-contact-a/config}
+  - {method: OPTIONS, path: /submissions}
+  - {method: POST,    path: /submissions}
+  - {method: GET,     path: /admin/submissions, auth: bearer}
+  - {method: GET,     path: /admin/stats, auth: bearer}
+  - {method: POST,    path: /dev/toggles}
+  - {method: POST,    path: /dev/jobs/run}
